@@ -18,7 +18,8 @@ import java.util.concurrent.TimeUnit;
 public class AppConfig {
 
     @Bean
-    public OkHttpClient okHttpClient(@Value("${proxy.host}") String host,
+    public OkHttpClient okHttpClient(@Value("${proxy.enable}") boolean enable,
+                                     @Value("${proxy.host}") String host,
                                      @Value("${proxy.port}") int port) {
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .connectTimeout(30, TimeUnit.SECONDS)
@@ -34,7 +35,7 @@ public class AppConfig {
                         return chain.proceed(builder.build());
                     }
                 })
-                .proxy(new Proxy(Proxy.Type.SOCKS, new InetSocketAddress(host, port)))
+                .proxy(enable ? new Proxy(Proxy.Type.SOCKS, new InetSocketAddress(host, port)) : Proxy.NO_PROXY)
                 .build();
         return httpClient;
     }
