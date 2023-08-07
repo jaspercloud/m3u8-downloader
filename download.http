@@ -1,0 +1,10 @@
+POST http://localhost:8080/api/download
+Content-Type: application/json
+
+{
+  "videoName": "test3",
+  "url": "https://europe.olemovienews.com/ts2/20230723/jqEwicJf/mp4/jqEwicJf.mp4/index-v1-a1.m3u8"
+}
+
+###
+
