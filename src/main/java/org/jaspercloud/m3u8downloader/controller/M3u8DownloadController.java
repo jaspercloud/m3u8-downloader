@@ -56,7 +56,7 @@ public class M3u8DownloadController implements InitializingBean {
     public void download(@RequestBody DownloadInfo downloadInfo) throws Exception {
         File videoDir = new File(baseDir, downloadInfo.getVideoName());
         videoDir.mkdirs();
-        logger.info("start m3u8: videoName={}", downloadInfo.getVideoName());
+        logger.info("download m3u8: videoName={}", downloadInfo.getVideoName());
         M3u8 m3u8 = m3u8Downloader.download(downloadInfo.getUrl());
         logger.info("completed m3u8: videoName={}", downloadInfo.getVideoName());
         m3u8FileWriter.write(videoDir, "index.m3u8", m3u8.getMetaList());
